@@ -36,7 +36,7 @@ void MainWindow::Initialization()
 
 void MainWindow::displayNumber()
 {
-    double LCDValue = (lastNumber).toDouble();
+    qreal LCDValue = (lastNumber).toDouble();
     if (LCDValue < qPow(10, 13))
     {
         ui->lcdNumber->display(LCDValue);
@@ -101,6 +101,8 @@ void MainWindow::on_pushButton_div_clicked()
     }
 
     pendingOperator = "/";
+    pendingOperatorForEqual = "/";
+    equalOperand = 0;
     waitingForOperand = true;
 }
 
@@ -137,6 +139,8 @@ void MainWindow::on_pushButton_AC_clicked()
     lastNumber = "0";
     resultSoFar = 0;
     pendingOperator.clear();
+    pendingOperatorForEqual.clear();
+    equalOperand = 0;
 
     ui->lcdNumber->display(0);
 }
@@ -381,7 +385,7 @@ bool MainWindow::calculate(double rightOperand)
                     resultSoFar /= rightOperand;
                 }
 
-    if (resultSoFar > qPow(10, 12))
+    if (resultSoFar > qPow(10, 13) || resultSoFar < qPow(10, -13))
         resultSoFar = temp;
 
     return true;
@@ -409,6 +413,8 @@ void MainWindow::on_pushButton_mul_clicked()
     }
 
     pendingOperator = "X";
+    pendingOperatorForEqual = "X";
+    equalOperand = 0;
     waitingForOperand = true;
 }
 
@@ -434,6 +440,8 @@ void MainWindow::on_pushButton_sub_clicked()
     }
 
     pendingOperator = "-";
+    pendingOperatorForEqual = "-";
+    equalOperand = 0;
     waitingForOperand = true;
 }
 
@@ -459,17 +467,20 @@ void MainWindow::on_pushButton_add_clicked()
     }
 
     pendingOperator = "+";
+    pendingOperatorForEqual = "+";
+    equalOperand = 0;
     waitingForOperand = true;
 }
 
 void MainWindow::on_pushButton_equ_clicked()
 {
     deleteLastDot();
-    double operand = lastNumber.toDouble();
-
+    if (equalOperand == 0)
+        equalOperand = lastNumber.toDouble();
+    pendingOperator = pendingOperatorForEqual;
     if (!pendingOperator.isEmpty())
     {
-        if (!calculate(operand))
+        if (!calculate(equalOperand))
         {
             invalidOperation();
             return;
@@ -481,6 +492,5 @@ void MainWindow::on_pushButton_equ_clicked()
     }
 
     pendingOperator.clear();
-    resultSoFar = 0;
     waitingForOperand = true;
 }

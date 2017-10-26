@@ -29,6 +29,8 @@ private:
     double resultSoFar;
     QString pendingOperator;
     bool waitingForOperand;
+    double equalOperand;
+    QString pendingOperatorForEqual;
 
 private slots:
     void DigitButtonPressed();
