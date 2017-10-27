@@ -123,14 +123,15 @@ void MainWindow::on_pushButton_com_clicked()
     waitingForOperand = false;
 }
 
+
 void MainWindow::on_pushButtonC_clicked()
 {
     if (waitingForOperand)
-        return;
+            return;
 
-    lastNumber = "0";
-    ui->lcdNumber->display(0);
-    waitingForOperand = true;
+        lastNumber = "0";
+        ui->lcdNumber->display(0);
+        waitingForOperand = true;
 }
 
 void MainWindow::on_pushButton_AC_clicked()
@@ -385,9 +386,16 @@ bool MainWindow::calculate(double rightOperand)
                     resultSoFar /= rightOperand;
                 }
 
-    if (resultSoFar > qPow(10, 13) || resultSoFar < qPow(10, -13))
+    qDebug() << -qPow(-10, 12);
+    if (resultSoFar < qPow(10, 13) && resultSoFar > qPow(10, -13) ||
+            resultSoFar > -qPow(10, 12) && resultSoFar < -qPow(10, -12) ||
+            resultSoFar == 0)
+    {
+        return true;
+    }
+    else {
         resultSoFar = temp;
-
+    }
     return true;
 }
 

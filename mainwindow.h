@@ -34,24 +34,24 @@ private:
 
 private slots:
     void DigitButtonPressed();
-    void on_pushButton_div_clicked();
+    void on_pushButton_div_clicked(); // Server
     void on_pushButton_com_clicked();
     void on_pushButtonC_clicked();
     void on_pushButton_AC_clicked();
     void on_pushButton_BS_clicked();
-    void on_pushButton_pm_clicked();
-    void on_pushButton_proc_clicked();
-    void on_pushButton_1X_clicked();
-    void on_pushButton_Cos_clicked();
-    void on_pushButton_Sin_clicked();
-    void on_pushButton_Sqrt_clicked();
-    void on_pushButton_ln_clicked();
-    void on_pushButton_Exp_clicked();
-    bool calculate(double rightOperand);
-    void on_pushButton_mul_clicked();
-    void on_pushButton_sub_clicked();
-    void on_pushButton_add_clicked();
-    void on_pushButton_equ_clicked();
+    void on_pushButton_pm_clicked(); // Server
+    void on_pushButton_proc_clicked(); // Server
+    void on_pushButton_1X_clicked(); // Server
+    void on_pushButton_Cos_clicked(); // Server
+    void on_pushButton_Sin_clicked(); // Server
+    void on_pushButton_Sqrt_clicked(); // Server
+    void on_pushButton_ln_clicked(); // Server
+    void on_pushButton_Exp_clicked(); // Server
+    bool calculate(double rightOperand); // Server
+    void on_pushButton_mul_clicked(); // Server
+    void on_pushButton_sub_clicked(); // Server
+    void on_pushButton_add_clicked(); // Server
+    void on_pushButton_equ_clicked(); // Server
 };
 
 #endif // MAINWINDOW_H
